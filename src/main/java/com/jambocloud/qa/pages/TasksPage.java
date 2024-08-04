@@ -97,7 +97,7 @@ public class TasksPage extends TestBase {
     }
 
     public void selectDueDate(String option) {
-        switch(option) {
+        switch (option) {
             case "All":
                 dueDateAll.click();
                 break;
@@ -115,12 +115,13 @@ public class TasksPage extends TestBase {
                 break;
         }
     }
+
     public void selectAlwaysShowOverdueTasks() {
         alwaysShowOverdueTasks.click();
     }
 
     public void selectAssignedTo(String option) {
-        switch(option) {
+        switch (option) {
             case "All":
                 assignedToAll.click();
                 break;
@@ -135,6 +136,7 @@ public class TasksPage extends TestBase {
                 break;
         }
     }
+
     public void selectLowPriority() {
         priorityLow.click();
     }
@@ -148,7 +150,7 @@ public class TasksPage extends TestBase {
     }
 
     public void selectStatus(String option) {
-        switch(option) {
+        switch (option) {
             case "Not Complete":
                 statusNotComplete.click();
                 break;
@@ -162,7 +164,7 @@ public class TasksPage extends TestBase {
     }
 
     public void selectRecordsToBeReturned(String option) {
-        switch(option) {
+        switch (option) {
             case "Active":
                 recordsToBeReturnedActive.click();
                 break;
@@ -175,30 +177,28 @@ public class TasksPage extends TestBase {
         }
     }
 
-    public boolean tasksGridResultContainsTaskByTaskId(String taskId){
+    public boolean tasksGridResultContainsTaskByTaskId(String taskId) {
         //TODO: Return result as an object for further verification
         return tasksGrid.getText().contains(taskId);
-     }
+    }
 
-     public void clickOnFirstResultOfTheTasksGrid(){
+    public void clickOnFirstResultOfTheTasksGrid() {
         List<WebElement> tableRows = tasksGrid.findElements(By.xpath("//table/tr"));
         tableRows.get(0).click();
-     }
+    }
 
-    public int tasksGridResultsCount(){
+    public int tasksGridResultsCount() {
         List<WebElement> tableRows = tasksGrid.findElements(By.xpath("//table/tr"));
         return tableRows.size();
     }
 
-
-
-    public boolean selectedTaskResultContainsTaskData(String taskId, String taskName, String assignedTo, String priority, String date, String createdBy){
+    public boolean selectedTaskResultContainsTaskData(String taskId, String taskName, String assignedTo, String priority, String dueDate, String createdBy) {
         //TODO: Return result as an object for further verification
         return selectedTaskView.getText().contains(taskId)
                 && selectedTaskView.getText().contains(taskName)
                 && selectedTaskView.getText().contains(assignedTo)
                 && selectedTaskView.getText().contains(priority)
-                && selectedTaskView.getText().contains(date)
+                && selectedTaskView.getText().contains(dueDate)
                 && selectedTaskView.getText().contains(createdBy);
     }
 
