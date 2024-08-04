@@ -18,7 +18,7 @@ public class TasksTest extends TestBase {
 
     @BeforeClass
     public void setupClass() {
-        excelUtil = new ExcelUtil("test-data/JamboCloud-TestData.xlsx", "Sheet1");
+        excelUtil = new ExcelUtil("test-data/JamboCloud-FilterPanel-TestData.xlsx", "Sheet1");
     }
 
     @BeforeMethod
@@ -54,25 +54,42 @@ public class TasksTest extends TestBase {
     ) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // 30 seconds timeout
 
-        tasksPage.enterKeyword(keyword);
+        if (!keyword.isEmpty()) {
+            tasksPage.enterKeyword(keyword);
+        }
 
-        tasksPage.selectDueDate(dueDate);
+        if (!dueDate.isEmpty()) {
+            tasksPage.selectDueDate(dueDate);
+        }
+
         if (alwaysShowOverdueTasks.equals("1")) {
             tasksPage.selectAlwaysShowOverdueTasks();
         }
-        tasksPage.selectAssignedTo(assignedTo);
+
+        if (!assignedTo.isEmpty()) {
+            tasksPage.selectAssignedTo(assignedTo);
+        }
+
         if (priorityLow.equals("1")) {
             tasksPage.selectLowPriority();
         }
+
         if (priorityMedium.equals("1")) {
             tasksPage.selectMediumPriority();
         }
+
         if (priorityHigh.equals("1")) {
             tasksPage.selectHighPriority();
         }
-        tasksPage.selectStatus(status);
-        tasksPage.selectRecordsToBeReturned(recordsToBeReturned);
-        //TODO: Add a wait
+
+        if (!status.isEmpty()) {
+            tasksPage.selectStatus(status);
+        }
+
+        if (!recordsToBeReturned.isEmpty()) {
+            tasksPage.selectRecordsToBeReturned(recordsToBeReturned);
+        }
+
         // Wait until the task grid is loaded and the specific task is present
         wait.until(ExpectedConditions.visibilityOf(tasksPage.getTasksGrid()));
 
