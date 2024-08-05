@@ -177,21 +177,46 @@ public class TasksPage extends TestBase {
         }
     }
 
-    public boolean tasksGridResultContainsTaskByTaskId(String taskId) {
-        //TODO: Return result as an object for further verification
-        return tasksGrid.getText().contains(taskId);
+    /**
+     * Obtain an array of task ids from the result grid
+     *
+     * @return array of task ids
+     */
+    public String[] tasksGridResultTaskIds() {
+        //TODO: Return result as a list of object for further verification. Right now it returns an array of task ids.
+        List<WebElement> tableRows = tasksGrid.findElements(By.xpath("//table/tr"));
+        return (String[]) tableRows.stream().map(a -> a.findElement(By.className("task-id")).getText()).toArray();
     }
 
+    /**
+     * Click on the first result of the task grid
+     */
     public void clickOnFirstResultOfTheTasksGrid() {
         List<WebElement> tableRows = tasksGrid.findElements(By.xpath("//table/tr"));
         tableRows.get(0).click();
     }
 
+    /**
+     * Get result grid row count
+     *
+     * @return row count
+     */
     public int tasksGridResultsCount() {
         List<WebElement> tableRows = tasksGrid.findElements(By.xpath("//table/tr"));
         return tableRows.size();
     }
 
+    /**
+     * Checks if task view contains expected values
+     *
+     * @param taskId     task id
+     * @param taskName   task name
+     * @param assignedTo assigned to
+     * @param priority   priority
+     * @param dueDate    due data
+     * @param createdBy  created by
+     * @return true if all the data contains in the task detail view (right side panel)
+     */
     public boolean selectedTaskResultContainsTaskData(String taskId, String taskName, String assignedTo, String priority, String dueDate, String createdBy) {
         //TODO: Return result as an object for further verification
         return selectedTaskView.getText().contains(taskId)
